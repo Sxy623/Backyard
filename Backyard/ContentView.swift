@@ -17,19 +17,19 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab(Tabs.数据监测.name, systemImage: Tabs.数据监测.symbol) {
-                // ...
+                DataMonitoringView()
             }.customizationID(Tabs.数据监测.customizationID)
             
             Tab(Tabs.智能预警.name, systemImage: Tabs.智能预警.symbol) {
-                // ...
+                SmartAlertView()
             }.customizationID(Tabs.智能预警.customizationID)
             
             Tab(Tabs.科研支持.name, systemImage: Tabs.科研支持.symbol) {
-                // ...
+                ResearchSupportView()
             }.customizationID(Tabs.科研支持.customizationID)
             
             Tab(Tabs.供销管理.name, systemImage: Tabs.供销管理.symbol) {
-                // ...
+                SupplyManagementView()
             }.customizationID(Tabs.供销管理.customizationID)
             
             TabSection("快速访问") {
