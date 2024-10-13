@@ -11,7 +11,6 @@ struct ContentView: View {
     
     @AppStorage("sidebarCustomizations") var tabViewCustomization: TabViewCustomization
     @State private var selectedTab: Tabs = .数据监测
-    
     @State var items = ["门头沟黄安坨", "一号实验田", "二号实验田"]
     
     var body: some View {

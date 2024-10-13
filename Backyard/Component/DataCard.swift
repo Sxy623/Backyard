@@ -18,7 +18,7 @@ struct DataCard: View {
     ]
     
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 10) {
             HStack {
                 Image(systemName: symbol)
                     .font(.system(size: 13))
@@ -27,7 +27,7 @@ struct DataCard: View {
                     .fontWeight(.regular)
                 Spacer()
             }
-            .foregroundStyle(Color.black.opacity(0.6))
+            .foregroundStyle(Color.secondary)
             .padding(.horizontal, 16)
             
             HStack {
@@ -44,6 +44,7 @@ struct DataCard: View {
                     Text(desc)
                         .font(.system(size: 13))
                         .fontWeight(.regular)
+                        .foregroundStyle(Color.secondary)
                     Spacer()
                     Text(value)
                         .font(.system(size: 13))
@@ -66,7 +67,6 @@ struct DataCard: View {
             HStack(spacing: 20) {
                 DataCard()
                     .frame(width: 178, height:  178)
-                
                 DataCard()
                     .frame(width: 178, height:  178)
             }
