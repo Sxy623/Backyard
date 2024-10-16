@@ -11,6 +11,8 @@ struct DataMonitoringView: View {
     
     @Environment(DataManager.self) var dataManager
     
+    @State private var showSheet = false
+    
     var threshold: CGFloat = 1133.0
     var sizeS: CGFloat = 178.0
     var sizeM: CGFloat = 376.0
@@ -57,6 +59,9 @@ struct DataMonitoringView: View {
                     HStack(spacing: 20) {
                         DataCard(symbol: "sensor", title: "设备信息", data: "DJI_Mavic", details: [])
                             .frame(width: sizeM, height:  sizeM)
+                            .onTapGesture {
+                                showSheet = true
+                            }
                         VStack(spacing: 20) {
                             HStack(spacing: 20) {
                                 DataCard(symbol: "thermometer.low", title: "温度", data: "\(String(format: "%.0f", dataManager.temperature))°C", details: [])
@@ -111,6 +116,9 @@ struct DataMonitoringView: View {
                         }
                     }
                 }
+            }
+            .sheet(isPresented: $showSheet) {
+                DataCardDetail()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
