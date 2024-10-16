@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct BackyardApp: App {
+    
+    @State private var dataManager = DataManager()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .tint(Color.green)
+                .environment(dataManager)
         }
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DataMonitoringView: View {
     
+    @Environment(DataManager.self) var dataManager
+    
     var threshold: CGFloat = 1133.0
     var sizeS: CGFloat = 178.0
     var sizeM: CGFloat = 376.0
@@ -57,12 +59,12 @@ struct DataMonitoringView: View {
                             .frame(width: sizeM, height:  sizeM)
                         VStack(spacing: 20) {
                             HStack(spacing: 20) {
-                                DataCard(symbol: "thermometer.low", title: "温度", data: "25°C", details: [])
+                                DataCard(symbol: "thermometer.low", title: "温度", data: "\(String(format: "%.0f", dataManager.temperature))°C", details: [])
                                     .frame(width: sizeS, height:  sizeS)
                                 DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
                                     .frame(width: sizeS, height:  sizeS)
                                 if width > threshold {
-                                    DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
+                                    DataCard(symbol: "humidity.fill", title: "降水", data: "0mm", details: [])
                                         .frame(width: sizeS, height:  sizeS)
                                 }
                             }
@@ -70,23 +72,23 @@ struct DataMonitoringView: View {
                                 DataCard(symbol: "sun.max.fill", title: "太阳辐射", data: "567 W/m²", details: [])
                                     .frame(width: sizeM, height:  sizeS)
                                 if width > threshold {
-                                    DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
+                                    DataCard(symbol: "humidity.fill", title: "露点", data: "15°C", details: [])
                                         .frame(width: sizeS, height:  sizeS)
                                 }
                             }
                         }
                     }
                     HStack(spacing: 20) {
-                        DataCard(symbol: "thermometer.low", title: "温度", data: "25°C", details: [])
+                        DataCard(symbol: "thermometer.low", title: "湿球温度", data: "10°C", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
+                        DataCard(symbol: "humidity.fill", title: "干球温度", data: "12°C", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "thermometer.low", title: "温度", data: "25°C", details: [])
+                        DataCard(symbol: "thermometer.low", title: "饱和水汽压差", data: "0.45kPa", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
+                        DataCard(symbol: "humidity.fill", title: "叶面湿度", data: "0min", details: [])
                             .frame(width: sizeS, height:  sizeS)
                         if width > threshold {
-                            DataCard(symbol: "humidity.fill", title: "湿度", data: "48%", details: [])
+                            DataCard(symbol: "humidity.fill", title: "土壤水分占比", data: "65%", details: [])
                                 .frame(width: sizeS, height:  sizeS)
                         }
                     }
@@ -117,4 +119,5 @@ struct DataMonitoringView: View {
 
 #Preview {
     DataMonitoringView()
+        .environment(DataManager())
 }
