@@ -34,7 +34,7 @@ struct ContentView: View {
             TabSection("快速访问") {
                 ForEach(items, id: \.self) { item in
                     Tab(item, systemImage: "square.grid.2x2") {
-                        // ...
+                        // ..
                     }
                 }
             }

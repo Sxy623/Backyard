@@ -66,34 +66,34 @@ struct DataMonitoringView: View {
                             HStack(spacing: 20) {
                                 DataCard(symbol: "thermometer.low", title: "温度", data: "\(String(format: "%.0f", dataManager.temperature))°C", details: [])
                                     .frame(width: sizeS, height:  sizeS)
-                                DataCard(symbol: "humidity.fill", title: "湿度", data: "\(String(format: ".0f", dataManager.humidity))", details: [])
+                                DataCard(symbol: "humidity.fill", title: "湿度", data: "\(String(format: "%.0f", dataManager.humidity))", details: [])
                                     .frame(width: sizeS, height:  sizeS)
                                 if width > threshold {
-                                    DataCard(symbol: "humidity.fill", title: "降水", data: "\(String(format: ".0f", dataManager.precipitation))mm", details: [])
+                                    DataCard(symbol: "humidity.fill", title: "降水", data: "\(String(format: "%.0f", dataManager.precipitation))mm", details: [])
                                         .frame(width: sizeS, height:  sizeS)
                                 }
                             }
                             HStack(spacing: 20) {
-                                DataCard(symbol: "sun.max.fill", title: "太阳辐射", data: "\(String(format: ".0f", dataManager.solarRadiation)) W/m²", details: [])
+                                DataCard(symbol: "sun.max.fill", title: "太阳辐射", data: "\(String(format: "%.0f", dataManager.solarRadiation)) W/m²", details: [])
                                     .frame(width: sizeM, height:  sizeS)
                                 if width > threshold {
-                                    DataCard(symbol: "humidity.fill", title: "露点", data: "\(String(format: ".0f", dataManager.dewPoint))°C", details: [])
+                                    DataCard(symbol: "humidity.fill", title: "露点", data: "\(String(format: "%.0f", dataManager.dewPoint))°C", details: [])
                                         .frame(width: sizeS, height:  sizeS)
                                 }
                             }
                         }
                     }
                     HStack(spacing: 20) {
-                        DataCard(symbol: "thermometer.low", title: "湿球温度", data: "\(String(format: ".0f", dataManager.wetBulbTemperature))°C", details: [])
+                        DataCard(symbol: "thermometer.low", title: "湿球温度", data: "\(String(format: "%.0f", dataManager.wetBulbTemperature))°C", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "humidity.fill", title: "干球温度", data: "\(String(format: ".0f", dataManager.dryBulbTemperature))°C", details: [])
+                        DataCard(symbol: "humidity.fill", title: "干球温度", data: "\(String(format: "%.0f", dataManager.dryBulbTemperature))°C", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "thermometer.low", title: "饱和水汽压差", data: "\(String(format: ".0f", dataManager.vpd))kPa", details: [])
+                        DataCard(symbol: "thermometer.low", title: "饱和水汽压差", data: "\(String(format: "%.0f", dataManager.vpd))kPa", details: [])
                             .frame(width: sizeS, height:  sizeS)
-                        DataCard(symbol: "humidity.fill", title: "叶面湿度", data: "\(String(format: ".0f", dataManager.leafWetness))min", details: [])
+                        DataCard(symbol: "humidity.fill", title: "叶面湿度", data: "\(String(format: "%.0f", dataManager.leafWetness))min", details: [])
                             .frame(width: sizeS, height:  sizeS)
                         if width > threshold {
-                            DataCard(symbol: "humidity.fill", title: "土壤水分占比", data: "\(String(format: ".0f", dataManager.soilMoisture))%", details: [])
+                            DataCard(symbol: "humidity.fill", title: "土壤水分占比", data: "\(String(format: "%.0f", dataManager.soilMoisture))%", details: [])
                                 .frame(width: sizeS, height:  sizeS)
                         }
                     }
