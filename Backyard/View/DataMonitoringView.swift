@@ -85,6 +85,9 @@ struct DataMonitoringView: View {
                                     .overlay {
                                         ZStack {
                                             Image("device")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 200, height: 304)
                                                 .offset(x: sizeM * 0.2, y: sizeM * 0.1)
                                             VStack(spacing: 30) {
                                                 CirclePanel(number: String(format: "%.0f", dataManager.battery), unit: "mV", percentage: 0.65, rotation: 310, title: "设备电量")
@@ -131,6 +134,7 @@ struct DataMonitoringView: View {
                                                     .offset(x: sizeS * 0.3, y: sizeS * 0.2)
                                             }
                                             .frame(width: sizeS, height:  sizeS)
+                                            .clipped()
                                         }
                                     }
                                     HStack(spacing: 20) {
@@ -143,6 +147,9 @@ struct DataMonitoringView: View {
                                         .frame(width: sizeM, height:  sizeS)
                                         .overlay {
                                             Image("solar")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 175, height: 125)
                                                 .offset(x: sizeM * 0.2, y: sizeS * 0.2)
                                         }
                                         if width > threshold {
@@ -216,6 +223,7 @@ struct DataMonitoringView: View {
                                             .offset(x: sizeS * 0.3, y: sizeS * 0.2)
                                     }
                                     .frame(width: sizeS, height:  sizeS)
+                                    .clipped()
                                     DataCard(
                                         symbol: "drop.degreesign.fill", title: "露点",
                                         data: "\(String(format: "%.1f", dataManager.dewPoint))°C",
