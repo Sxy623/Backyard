@@ -14,7 +14,7 @@ struct ResearchSupportView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Text("科技支持")
+                    Text("科研支持")
                         .fontWeight(.semibold)
                         .font(.system(size: 28))
                         .padding(.leading, 32)
@@ -51,6 +51,7 @@ struct ResearchSupportView: View {
                         ForEach(0..<researchSupportDataManager.researchItems.count, id: \.self) { idx in
                             NavigationLink {
                                 DetailResearchSupportView(currentResearchItemIdx: idx)
+                                    .environmentObject(researchSupportDataManager)
                             } label: {
                                 ResearchSupportCard(researchItem: $researchSupportDataManager.researchItems[idx])
                                     .frame(height: researchSupportDataManager.researchItems[idx].showDetail ? 320 : 170)
