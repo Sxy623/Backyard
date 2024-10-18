@@ -28,7 +28,7 @@ struct ContentView: View {
             }.customizationID(Tabs.科研支持.customizationID)
             
             Tab(Tabs.供销管理.name, systemImage: Tabs.供销管理.symbol) {
-                SupplyManagementView()
+                SupplyAndMarketingView()
             }.customizationID(Tabs.供销管理.customizationID)
             
             TabSection("快速访问") {
