@@ -8,36 +8,36 @@
 import SwiftUI
 
 struct SmartAlertView: View {
+    
     @State private var showImagePicker = false // 用于控制图片选择器的显示
     @Environment(\.dismiss) var dismiss // 用于返回的环境变量
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
-                VStack(alignment: .leading) {
+                VStack(spacing: 30) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("智能预警")
-                                .font(.custom("PingFangSC-Semibold", size: 28))
+                                .font(.system(size: 28))
+                                .fontWeight(.semibold)
                                 .foregroundStyle(.black)
                             Text("自动预警/拍照识别，时刻掌握农田异常")
-                                .font(.custom("PingFangSC", size: 16))
+                                .font(.system(size: 16))
                                 .foregroundStyle(.black)
                                 .opacity(0.6)
                         }
-                        .padding(.leading, 79)
-                        .padding(.bottom, 34)
-
-                    Spacer()
-
+                        
+                        Spacer()
+                        
                         CameraButton(showImagePicker: $showImagePicker)
-                            .padding(.trailing, 83) // 使用新的 CameraButton
                     }
 
-                    HStack(alignment: .top) {
+                    HStack(spacing: 20) {
                         ZStack(alignment: .bottomTrailing) {
                             ZStack(alignment: .top) {
                                 Image("SmartAlertMap")
+                                    .resizable()
 
                                 Image("WarningCount")
                                     .padding(.top, 12)
@@ -48,68 +48,89 @@ struct SmartAlertView: View {
                                     .padding(.trailing, 12)
                             }
                         }
-                        .frame(width: 420, height: 574)
-                        .padding(.bottom, 20)
-                        
-                        Spacer()
+                        .frame(maxWidth: .infinity)
 
-                        VStack {
+                        VStack(spacing: 20) {
                             NavigationLink(destination: WeatherAlertView()) {
-                                AlertCard(backgroundImage: Image("WeatherAlertBackground") , icon: Image(systemName: "snow"), title: "极端天气预警", description: "暂无，安心", iconColor: 0xCFF07C, titleColor: 0xCFF07C, descriptionColor: 0xCFF07C, numberOfAlert: 0)
-                                    .previewLayout(.sizeThatFits)
-                                    .frame(width: 332, height: 210)
-                                    .padding(.bottom, 20)
+                                AlertCard(
+                                    backgroundColor: Color.Brand._5,
+                                    icon: "snow",
+                                    title: "极端天气预警",
+                                    description: "暂无，安心",
+                                    tintColor: Color.Brand._2,
+                                    numberOfAlert: 0
+                                )
+                                .frame(maxWidth: .infinity, minHeight: 210)
                             }
+                            
                             NavigationLink(destination: DiseaseAlertView()) {
-                                AlertCard(backgroundImage: Image("DiseaseAlertBackground") , icon: Image(systemName: "syringe.fill"), title: "病害预警", description: "2 号试验田（白粉病）/...", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 2)
-                                    .previewLayout(.sizeThatFits)
-                                    .frame(width: 332, height: 162)
+                                AlertCard(
+                                    backgroundColor: Color.Brand._2,
+                                    icon: "syringe.fill",
+                                    title: "病害预警",
+                                    description: "2 号试验田（白粉病）/...",
+                                    tintColor: Color.Brand._5,
+                                    numberOfAlert: 2
+                                )
+                                .frame(maxWidth: .infinity, minHeight: 162)
                             }
                             NavigationLink(destination: PestAlertView()) {
-                                AlertCard(backgroundImage: Image("PestAlertBackground") , icon: Image(systemName: "ladybug.fill"), title: "病害预警", description: "2 号试验田（白粉病）/...", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 2)
-                                    .previewLayout(.sizeThatFits)
-                                    .padding(.top, 20)
-                                    .frame(width: 332, height: 162)
+                                AlertCard(
+                                    backgroundColor: Color.Brand._6,
+                                    icon: "ladybug.fill",
+                                    title: "虫害预警",
+                                    description: "2 号试验田（蚜虫）/...",
+                                    tintColor: Color.Brand._5,
+                                    numberOfAlert: 3
+                                )
+                                .frame(maxWidth: .infinity, minHeight: 162)
                             }
                         }
-                        .padding(.trailing, 79)
-                        //.frame(width: 772)
                     }
-                    .padding(.leading, 79)
-
-                    HStack(alignment: .top) {
+                
+                    HStack(spacing: 20) {
                         NavigationLink(destination: WaterAlertView()) {
-                            AlertCard(backgroundImage: Image("WaterAlertBackground"), icon: Image(systemName: "water.waves"), title: "水资源", description: "暂无，安心", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 0)
-                                .padding(.trailing, 20)
-                                //.frame(width: 285, height: 162)
-                                //.scaledToFit()
+                            AlertCard(
+                                backgroundColor: Color.white,
+                                icon: "water.waves",
+                                title: "水资源",
+                                description: "暂无，安心",
+                                tintColor: Color.Brand._5,
+                                numberOfAlert: 0
+                            )
+                            .frame(width: 285, height: 162)
                         }
 
                         NavigationLink(destination: SoilAlertView()) {
-                            AlertCard(backgroundImage: Image("SoilAlertBackground"), icon: Image(systemName: "meditate"), title: "土壤健康", description: "暂无，安心", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 0)
-                                //.frame(width: 285, height: 162)
-                                //.scaledToFit()
-                                //.frame(width: 285, height: 162)
+                            AlertCard(
+                                backgroundColor: Color.white,
+                                icon: "camera.macro",
+                                title: "土壤健康",
+                                description: "暂无，安心",
+                                tintColor: Color.Brand._5,
+                                numberOfAlert: 0
+                            )
+                            .frame(width: 285, height: 162)
                         }
+                        
                         NavigationLink(destination: MoreAlertView()) {
-                            Image("MoreAlert")
-                                .padding(.leading, 20)
-                                .padding(.trailing, 79)
-                                //.frame(width: 162, height: 162)
+                            Color.white
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .overlay {
+                                    Text("...")
+                                        .font(.system(size: 36))
+                                        .foregroundStyle(Color.Brand._5)
+                                }
                         }
                     }
-//                    .frame(width: 772, height: 162)
-                    .padding(.leading, 79)//这里应该是79，但是不知道为什么设置成79的时候并不在正确位置
-                    
                 }
-                .padding(.top, 71)
+                .padding(79)
                 .fullScreenCover(isPresented: $showImagePicker) {
                     ImagePicker(image: .constant(nil), sourceType: .camera)
                 }
             }
             .background(Color(hex: 0xFAFAFA))
         }
-        .navigationViewStyle(.stack)
     }
 }
 
