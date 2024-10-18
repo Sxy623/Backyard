@@ -19,8 +19,6 @@ struct SupplyAndMarketingView: View {
             Text("供销管理")
                 .font(.system(size: 28))
                 .fontWeight(.semibold)
-                
-            
             // Category Selection
             HStack {
                 CategoryButton(title: "水果", isSelected: $isFruitSelected)
@@ -35,7 +33,7 @@ struct SupplyAndMarketingView: View {
             // ScrollView for Cards
             ScrollView {
                 VStack(spacing: 16) {
-                    SupplyCard(itemName: "番茄", mainCategory: "蔬菜", subCategory: "茄科", imageName: "tomato", soldQuantity: 206, availableQuantity: 100, origin: "2号试验田")
+                    SupplyCard(itemName: "番茄", mainCategory: "蔬菜", subCategory: "茄科", imageName: "tomato", soldQuantity: 206, availableQuantity: 106, origin: "2号试验田")
                     SupplyCard(itemName: "苹果", mainCategory: "水果", subCategory: "蔷薇科", imageName: "apple", soldQuantity: 236, availableQuantity: 111, origin: "7号试验田")
                 }
                 .frame(width: 772)
@@ -93,6 +91,34 @@ struct IconWithText: View {
                     .font(.system(size: 13))
                     .foregroundColor(.black)
             }
+    }
+}
+
+struct BarChart: View {
+    var weight: Int
+    var coloredLength: CGFloat
+    var color: Int
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(Color(hex: 0xDCDCDC))
+                .frame(width: 310, height: 20)
+                .cornerRadius(8)
+            ZStack(alignment: .trailing) {
+                Rectangle()
+                    .frame(width: coloredLength, height: 20)
+                    .cornerRadius(8)
+                    .foregroundStyle(Color(hex: UInt(color)))
+                Text("\(weight)kg") // 显示已售数量
+                    .foregroundColor(.white)
+                    .padding(.trailing, 8)
+                    .font(.system(size: 12))
+                    .fontWeight(.medium)
+            }
+            
+            
+        }
     }
 }
 
@@ -158,54 +184,9 @@ struct SupplyCard: View {
                     }
                     .frame(width: 310)
                     // Placeholder for Bar Chart
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 183, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x3E6F35))
-                        Text("124kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 140)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 126, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x8CC544))
-                        Text("64kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 88)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 63, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xCFF07C))
-                        Text("18kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 27)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
+                    BarChart(weight: 124, coloredLength: 183, color: 0x3E6F35)
+                    BarChart(weight: 64, coloredLength: 126, color: 0x8CC544)
+                    BarChart(weight: 64, coloredLength: 63, color: 0xCFF07C)
                     HStack(spacing: 32) { // 设置图标之间的间距
                         IconWithText(text: "浙江", iconColor: 0x3E6F35)
                         IconWithText(text: "江苏", iconColor: 0x8CC544)
@@ -238,54 +219,9 @@ struct SupplyCard: View {
                         
                     }
                     .frame(width: 310)
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 183, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x28781A))
-                        Text("60kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 140)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 126, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xF0BF49))
-                        Text("31kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 88)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 63, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xB0390A))
-                        Text("9kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 27)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
+                    BarChart(weight: 60, coloredLength: 183, color: 0x28781A)
+                    BarChart(weight: 42, coloredLength: 126, color: 0xF0BF49)
+                    BarChart(weight: 9, coloredLength: 63, color: 0xB0390A)
                     HStack(spacing: 32) { // 设置图标之间的间距
                         IconWithText(text: "优品", iconColor: 0x28781A)
                         IconWithText(text: "良品", iconColor: 0xF0BF49)
