@@ -100,7 +100,7 @@ struct SmartAlertView: View {
                                 tintColor: Color.Brand._5,
                                 numberOfAlert: 0
                             )
-                            .frame(width: 285, height: 162)
+                            .frame(width: .infinity, height: 162)
                         }
                         
                         NavigationLink(destination: AlertClassTwoView()) {
@@ -112,7 +112,7 @@ struct SmartAlertView: View {
                                 tintColor: Color.Brand._5,
                                 numberOfAlert: 0
                             )
-                            .frame(width: 285, height: 162)
+                            .frame(width: .infinity, height: 162)
                         }
                         
                         NavigationLink(destination: MoreAlertView()) {
@@ -123,6 +123,7 @@ struct SmartAlertView: View {
                                         .font(.system(size: 36))
                                         .foregroundStyle(Color.Brand._5)
                                 }
+                                .frame(width: 162, height: .infinity)
                         }
                     }
                 }
