@@ -9,19 +9,22 @@ import SwiftUI
 
 struct DataCard: View {
     
-    var symbol: String = "sunrise"
-    var title: String = "标题"
-    var data: String = "0659"
+    var symbol: String? = "thermometer.low"
+    var title: String = "温度"
+    var data: String = "10.48°C"
     var details: [(desc: String, value: String)] = [
-        ("描述1", "数值"),
-        ("描述2", "数值"),
+        ("最大值", "14.23"),
+        ("最小值", "9.59"),
     ]
+    var dataSize: CGFloat = 32.0
     
     var body: some View {
         VStack(spacing: 10) {
             HStack {
-                Image(systemName: symbol)
-                    .font(.system(size: 13))
+                if let symbol = symbol {
+                    Image(systemName: symbol)
+                        .font(.system(size: 13))
+                }
                 Text(title)
                     .font(.system(size: 13))
                     .fontWeight(.regular)
@@ -32,8 +35,9 @@ struct DataCard: View {
             
             HStack {
                 Text(data)
-                    .font(.system(size: 32))
+                    .font(.system(size: dataSize))
                     .fontWeight(.medium)
+                    .foregroundStyle(Color(hex: 0x1A3F2F))
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -54,24 +58,36 @@ struct DataCard: View {
             .padding(.horizontal, 16)
         }
         .padding(.vertical, 16)
-        .background(.ultraThinMaterial)
+        .background(Color.white.opacity(0.8))
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
 #Preview {
-    HStack(spacing: 20) {
-        DataCard()
-            .frame(width: 376, height:  376)
-        VStack(spacing: 20) {
-            HStack(spacing: 20) {
-                DataCard()
-                    .frame(width: 178, height:  178)
-                DataCard()
-                    .frame(width: 178, height:  178)
-            }
+    var lightGreen = Color(hex: 0xFDFFF5)
+    var darkGreen = Color(hex: 0xD4EEB7)
+    
+    ZStack {
+        LinearGradient(
+            gradient: Gradient(colors: [lightGreen, darkGreen]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
+        
+        HStack(spacing: 20) {
             DataCard()
-                .frame(width: 376, height:  178)
+                .frame(width: 376, height:  376)
+            VStack(spacing: 20) {
+                HStack(spacing: 20) {
+                    DataCard()
+                        .frame(width: 178, height:  178)
+                    DataCard()
+                        .frame(width: 178, height:  178)
+                }
+                DataCard()
+                    .frame(width: 376, height:  178)
+            }
         }
     }
 }
