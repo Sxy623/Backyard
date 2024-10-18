@@ -11,7 +11,9 @@ struct SmartAlertView: View {
     
     @State private var showImagePicker = false // 用于控制图片选择器的显示
     @Environment(\.dismiss) var dismiss // 用于返回的环境变量
-
+    
+    let pestAlerts = [powderyMildewAlert, leafMoldAlert]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -32,13 +34,13 @@ struct SmartAlertView: View {
                         
                         CameraButton(showImagePicker: $showImagePicker)
                     }
-
+                    
                     HStack(spacing: 20) {
                         ZStack(alignment: .bottomTrailing) {
                             ZStack(alignment: .top) {
                                 Image("SmartAlertMap")
                                     .resizable()
-
+                                
                                 Image("WarningCount")
                                     .padding(.top, 12)
                             }
@@ -49,7 +51,7 @@ struct SmartAlertView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-
+                        
                         VStack(spacing: 20) {
                             NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(
@@ -87,7 +89,7 @@ struct SmartAlertView: View {
                             }
                         }
                     }
-
+                    
                     HStack(spacing: 20) {
                         NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
@@ -100,7 +102,7 @@ struct SmartAlertView: View {
                             )
                             .frame(width: 285, height: 162)
                         }
-
+                        
                         NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
                                 backgroundColor: Color.white,
@@ -130,16 +132,16 @@ struct SmartAlertView: View {
                 }
             }
             .background(Color(hex: 0xFAFAFA))
-//            .sheet(isPresented: $showSheet) {
-//                DataCardDetail()
-//            }
+            //            .sheet(isPresented: $showSheet) {
+            //                DataCardDetail()
+            //            }
         }
     }
 }
 
 struct CameraButton: View {
     @Binding var showImagePicker: Bool // 用于控制图片选择器的显示
-
+    
     var body: some View {
         Button(action: {
             print("Showing Image Picker")
