@@ -51,7 +51,7 @@ struct SmartAlertView: View {
                         .frame(maxWidth: .infinity)
 
                         VStack(spacing: 20) {
-                            NavigationLink(destination: WeatherAlertView()) {
+                            NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(
                                     backgroundColor: Color.Brand._5,
                                     icon: "snow",
@@ -63,7 +63,7 @@ struct SmartAlertView: View {
                                 .frame(maxWidth: .infinity, minHeight: 210)
                             }
                             
-                            NavigationLink(destination: DiseaseAlertView()) {
+                            NavigationLink(destination: AlertClassOneView( alertCount: pestAlerts.count, alertName: "病害预警", detailedAlerts: pestAlerts)) {
                                 AlertCard(
                                     backgroundColor: Color.Brand._2,
                                     icon: "syringe.fill",
@@ -74,7 +74,7 @@ struct SmartAlertView: View {
                                 )
                                 .frame(maxWidth: .infinity, minHeight: 162)
                             }
-                            NavigationLink(destination: PestAlertView()) {
+                            NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(
                                     backgroundColor: Color.Brand._6,
                                     icon: "ladybug.fill",
@@ -87,9 +87,9 @@ struct SmartAlertView: View {
                             }
                         }
                     }
-                
+
                     HStack(spacing: 20) {
-                        NavigationLink(destination: WaterAlertView()) {
+                        NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
                                 backgroundColor: Color.white,
                                 icon: "water.waves",
@@ -101,7 +101,7 @@ struct SmartAlertView: View {
                             .frame(width: 285, height: 162)
                         }
 
-                        NavigationLink(destination: SoilAlertView()) {
+                        NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
                                 backgroundColor: Color.white,
                                 icon: "camera.macro",
@@ -130,6 +130,9 @@ struct SmartAlertView: View {
                 }
             }
             .background(Color(hex: 0xFAFAFA))
+//            .sheet(isPresented: $showSheet) {
+//                DataCardDetail()
+//            }
         }
     }
 }
