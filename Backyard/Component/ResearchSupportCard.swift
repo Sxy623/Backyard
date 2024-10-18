@@ -40,8 +40,8 @@ struct ResearchSupportCard: View {
                 Spacer()
                 
                 HStack(alignment: .top, spacing: -8) {
-                    ForEach(researchItem.participants, id: \.self) { p in
-                        Image(p)
+                    ForEach(researchItem.participants, id: \.id) { p in
+                        Image(p.avatarName)
                             .resizable()
                             .frame(width: 32, height: 32)
                     }
