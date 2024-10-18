@@ -20,3 +20,4 @@ class DataManager {
     var leafWetness: Double = 2
     var soilMoisture: Double = 65
 }
+

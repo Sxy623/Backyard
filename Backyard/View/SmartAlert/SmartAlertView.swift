@@ -54,18 +54,22 @@ struct SmartAlertView: View {
                         Spacer()
 
                         VStack {
-                            NavigationLink(destination: WeatherAlertView()) {
+                            NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(backgroundImage: Image("WeatherAlertBackground") , icon: Image(systemName: "snow"), title: "极端天气预警", description: "暂无，安心", iconColor: 0xCFF07C, titleColor: 0xCFF07C, descriptionColor: 0xCFF07C, numberOfAlert: 0)
                                     .previewLayout(.sizeThatFits)
                                     .frame(width: 332, height: 210)
                                     .padding(.bottom, 20)
                             }
-                            NavigationLink(destination: DiseaseAlertView()) {
+                            let pestAlerts = [
+                                powderyMildewAlert,
+                                leafMoldAlert
+                            ]
+                            NavigationLink(destination: AlertClassOneView( alertCount: pestAlerts.count, alertName: "病害预警", detailedAlerts: pestAlerts)) {
                                 AlertCard(backgroundImage: Image("DiseaseAlertBackground") , icon: Image(systemName: "syringe.fill"), title: "病害预警", description: "2 号试验田（白粉病）/...", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 2)
                                     .previewLayout(.sizeThatFits)
                                     .frame(width: 332, height: 162)
                             }
-                            NavigationLink(destination: PestAlertView()) {
+                            NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(backgroundImage: Image("PestAlertBackground") , icon: Image(systemName: "ladybug.fill"), title: "病害预警", description: "2 号试验田（白粉病）/...", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 2)
                                     .previewLayout(.sizeThatFits)
                                     .padding(.top, 20)
@@ -78,16 +82,15 @@ struct SmartAlertView: View {
                     .padding(.leading, 79)
 
                     HStack(alignment: .top) {
-                        NavigationLink(destination: WaterAlertView()) {
+                        NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(backgroundImage: Image("WaterAlertBackground"), icon: Image(systemName: "water.waves"), title: "水资源", description: "暂无，安心", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 0)
-                                .padding(.trailing, 20)
-                                //.frame(width: 285, height: 162)
+                                .frame(width: 285, height: 162)
                                 //.scaledToFit()
                         }
 
-                        NavigationLink(destination: SoilAlertView()) {
-                            AlertCard(backgroundImage: Image("SoilAlertBackground"), icon: Image(systemName: "meditate"), title: "土壤健康", description: "暂无，安心", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 0)
-                                //.frame(width: 285, height: 162)
+                        NavigationLink(destination: AlertClassTwoView()) {
+                            AlertCard(backgroundImage: Image("SoilAlertBackground"), icon: Image(systemName: "apple.meditate"), title: "土壤健康", description: "暂无，安心", iconColor: 0x1A3F2F, titleColor: 0x1A3F2F, descriptionColor: 0x1A3F2F, numberOfAlert: 0)
+                                .frame(width: 285, height: 162)
                                 //.scaledToFit()
                                 //.frame(width: 285, height: 162)
                         }
@@ -95,7 +98,7 @@ struct SmartAlertView: View {
                             Image("MoreAlert")
                                 .padding(.leading, 20)
                                 .padding(.trailing, 79)
-                                //.frame(width: 162, height: 162)
+                                .frame(width: 162, height: 162)
                         }
                     }
 //                    .frame(width: 772, height: 162)
@@ -108,6 +111,9 @@ struct SmartAlertView: View {
                 }
             }
             .background(Color(hex: 0xFAFAFA))
+//            .sheet(isPresented: $showSheet) {
+//                DataCardDetail()
+//            }
         }
         .navigationViewStyle(.stack)
     }

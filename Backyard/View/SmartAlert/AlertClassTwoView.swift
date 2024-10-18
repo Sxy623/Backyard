@@ -1,5 +1,5 @@
 //
-//  SoilAlertView.swift
+//  AlertClassTwoView.swift
 //  Backyard
 //
 //  Created by 卢冠廷 on 2024/10/17.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SoilAlertView: View {
+struct AlertClassTwoView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -20,9 +20,11 @@ struct SoilAlertView: View {
             
             Spacer()
             
-            Text("Soil Alert")
+            Text("Class Two Alert")
                 .font(.largeTitle)
                 .padding()
+            
+            Spacer()
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -41,5 +43,5 @@ struct SoilAlertView: View {
 }
 
 #Preview {
-    SoilAlertView()
+    AlertClassTwoView()
 }
