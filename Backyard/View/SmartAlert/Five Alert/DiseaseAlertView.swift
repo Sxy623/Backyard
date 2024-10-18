@@ -8,8 +8,35 @@
 import SwiftUI
 
 struct DiseaseAlertView: View {
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                backButton
+                Spacer()
+            }
+            .padding()
+            
+            Spacer()
+            
+            Text("Disease Alert")
+                .font(.largeTitle)
+                .padding()
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+
+    private var backButton: some View {
+        Button(action: {
+            dismiss()
+        }) {
+            HStack {
+                Image(systemName: "chevron.left").foregroundColor(Color(hex: 0x28781A))
+                Text("智能预警")
+                    .foregroundColor(Color(hex: 0x28781A))
+            }
+        }
     }
 }
 
