@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SupplyAndMarketingView: View {
-    @State private var isFruitSelected: Bool = false
-    @State private var isVegetableSelected: Bool = false
-    @State private var isCerealSelected: Bool = false
+    @State private var isFruitSelected: Bool = true
+    @State private var isVegetableSelected: Bool = true
+    @State private var isCerealSelected: Bool = true
     @State private var searchText: String = ""
 
     var body: some View {
@@ -19,8 +19,7 @@ struct SupplyAndMarketingView: View {
             Text("供销管理")
                 .font(.system(size: 28))
                 .fontWeight(.semibold)
-                
-            
+                .padding(.top, 80)
             // Category Selection
             HStack {
                 CategoryButton(title: "水果", isSelected: $isFruitSelected)
@@ -30,13 +29,23 @@ struct SupplyAndMarketingView: View {
                 SearchBar(text: $searchText)
             }
             .frame(width: 772)
-            .padding()
+            .padding(.bottom, 32)
             
             // ScrollView for Cards
+            
+            let tomatoCard = SupplyCardData(itemName: "番茄", mainCategory: "蔬菜", subCategory: "茄科", imageName: "tomato", soldQuantity: 206, availableQuantity: 106, origin: "2号试验田", soldQuantityFirst: 124, soldQuantitySecond: 64, soldQuantityThird: 18, soldRegionFirst: "浙江", soldRegionSecond: "江苏", soldRegionThird: "上海", pendingPremiumQuantity: 60, pendingGoodQuantity: 31, pendingDefectiveQuantity: 15)
+            let appleCard = SupplyCardData(itemName: "苹果", mainCategory: "水果", subCategory: "蔷薇科", imageName: "apple", soldQuantity: 236, availableQuantity: 111, origin: "7号试验田", soldQuantityFirst: 154, soldQuantitySecond: 64, soldQuantityThird: 18, soldRegionFirst: "浙江", soldRegionSecond: "江苏", soldRegionThird: "上海", pendingPremiumQuantity: 60, pendingGoodQuantity: 42, pendingDefectiveQuantity: 9)
             ScrollView {
                 VStack(spacing: 16) {
-                    SupplyCard(itemName: "番茄", mainCategory: "蔬菜", subCategory: "茄科", imageName: "tomato", soldQuantity: 206, availableQuantity: 100, origin: "2号试验田")
-                    SupplyCard(itemName: "苹果", mainCategory: "水果", subCategory: "蔷薇科", imageName: "apple", soldQuantity: 236, availableQuantity: 111, origin: "7号试验田")
+                    if isFruitSelected{
+                        SupplyCard(supplyCardData: appleCard)
+                    }
+                    if isVegetableSelected{
+                        SupplyCard(supplyCardData: tomatoCard)
+                    }
+                    if isCerealSelected{
+                        
+                    }
                 }
                 .frame(width: 772)
             }
@@ -96,215 +105,31 @@ struct IconWithText: View {
     }
 }
 
-struct SupplyCard: View {
-    var itemName: String
-    var mainCategory: String
-    var subCategory: String
-    var imageName: String
-    var soldQuantity: Int
-    var availableQuantity: Int
-    var origin: String
-
+struct BarChart: View {
+    var weight: Int
+    var coloredLength: CGFloat
+    var color: Int
+    
     var body: some View {
-        VStack {
-            // Top Image with Labels
-            ZStack(alignment: .topLeading) {
-                Image(imageName) // 使用传入的图片名
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 154)
-                    .clipped()
-                
-                VStack(alignment: .leading) {
-                    Text(itemName)
-                        .padding(.top, 39)
-                        .padding(.bottom, 8)
-                        .font(.system(size: 36))
-                        .fontWeight(.semibold)
-                    Text(mainCategory + " | " + subCategory + " | " + origin)
-                        .font(.system(size: 14))
-                        .fontWeight(.medium)
-                        
-                }
-                .padding()
-                .foregroundColor(.white)
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(Color(hex: 0xDCDCDC))
+                .frame(width: 310, height: 20)
+                .cornerRadius(8)
+            ZStack(alignment: .trailing) {
+                Rectangle()
+                    .frame(width: coloredLength, height: 20)
+                    .cornerRadius(8)
+                    .foregroundStyle(Color(hex: UInt(color)))
+                Text("\(weight)kg") // 显示已售数量
+                    .foregroundColor(.white)
+                    .padding(.trailing, 8)
+                    .font(.system(size: 12))
+                    .fontWeight(.medium)
             }
-
-            // Sales Information
-            HStack {
-                VStack(alignment: .leading) {
-                    HStack(alignment: .center) {
-                        HStack(alignment: .bottom) {
-                            Text("\(soldQuantity)")
-                                .font(.system(size: 36))
-                                .fontWeight(.bold)
-                            
-                            Text("kg")
-                                .font(.system(size: 16))
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color(hex: 0x3C3C43))
-                        }
-                        
-                        Spacer()
-                        
-                        Text("已售")
-                            .frame(width: 53, height: 26)
-                            .font(.system(size: 14))
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color(hex: 0x3E6F35))
-                            .background(Color(hex: 0xF8FDEB))
-                            .cornerRadius(6)
-                        
-                    }
-                    .frame(width: 310)
-                    // Placeholder for Bar Chart
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 183, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x3E6F35))
-                        Text("124kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 140)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 126, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x8CC544))
-                        Text("64kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 88)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 63, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xCFF07C))
-                        Text("18kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 27)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    HStack(spacing: 32) { // 设置图标之间的间距
-                        IconWithText(text: "浙江", iconColor: 0x3E6F35)
-                        IconWithText(text: "江苏", iconColor: 0x8CC544)
-                        IconWithText(text: "上海", iconColor: 0xCFF07C)
-                    }
-                }
-                Spacer()
-                VStack(alignment: .leading) {
-                    HStack(alignment: .center) {
-                        HStack(alignment: .bottom) {
-                            Text("\(availableQuantity)")
-                                .font(.system(size: 36))
-                                .fontWeight(.bold)
-                            
-                            Text("kg")
-                                .font(.system(size: 16))
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color(hex: 0x3C3C43))
-                        }
-                        
-                        Spacer()
-                        
-                        Text("待售")
-                            .frame(width: 53, height: 26)
-                            .font(.system(size: 14))
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color(hex: 0xDF692E))
-                            .background(Color(hex: 0xDF692E).opacity(0.1))
-                            .cornerRadius(6)
-                        
-                    }
-                    .frame(width: 310)
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 183, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0x28781A))
-                        Text("60kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 140)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 126, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xF0BF49))
-                        Text("31kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 88)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    ZStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: 310, height: 20)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .frame(width: 63, height: 20)
-                            .cornerRadius(8)
-                            .foregroundStyle(Color(hex: 0xB0390A))
-                        Text("9kg") // 显示已售数量
-                            .foregroundColor(.white)
-                            .padding(.leading, 27)
-                            .font(.system(size: 12))
-                            .fontWeight(.medium)
-                    }
-                    HStack(spacing: 32) { // 设置图标之间的间距
-                        IconWithText(text: "优品", iconColor: 0x28781A)
-                        IconWithText(text: "良品", iconColor: 0xF0BF49)
-                        IconWithText(text: "次品", iconColor: 0xB0390A)
-                    }
-                }
-            }
-            .padding()
-
-            // Update Date
-            Text("更新日期: \(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none))")
-                .font(.footnote)
-                .foregroundColor(.gray)
-                .padding(.leading)
+            
+            
         }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(radius: 5)
-        .frame(width: 772, height: 477)
     }
 }
 

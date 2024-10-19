@@ -74,3 +74,5 @@ let leafMoldAlert = DetailedAlertCardData(
     isSolved: false // 设置为 false
 )
 
+let pestAlerts = [powderyMildewAlert, leafMoldAlert]
+
