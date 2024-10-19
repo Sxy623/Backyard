@@ -40,6 +40,8 @@ struct SmartAlertView: View {
                             Image("alert_map")
                                 .resizable()
                                 .scaledToFill()
+                                .frame(width: .infinity, height: 574)
+                                .clipped()
                             VStack {
                                 Color.white
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -88,7 +90,7 @@ struct SmartAlertView: View {
                                 }
                             }
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(width: .infinity, height: 574)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         
                         VStack(spacing: 20) {
@@ -101,7 +103,7 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._2,
                                     numberOfAlert: 0
                                 )
-                                .frame(maxWidth: .infinity, minHeight: 210)
+                                .frame(width: .infinity, height: 210)
                             }
                             
                             NavigationLink(destination: AlertClassOneView( alertCount: pestAlerts.count, alertName: "病害预警", detailedAlerts: pestAlerts)) {
@@ -113,7 +115,7 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._5,
                                     numberOfAlert: 2
                                 )
-                                .frame(maxWidth: .infinity, minHeight: 162)
+                                .frame(width: .infinity, height: 162)
                             }
                             NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(
@@ -124,7 +126,7 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._5,
                                     numberOfAlert: 3
                                 )
-                                .frame(maxWidth: .infinity, minHeight: 162)
+                                .frame(width: .infinity, height: 162)
                             }
                         }
                     }
