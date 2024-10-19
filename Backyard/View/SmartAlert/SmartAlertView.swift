@@ -36,21 +36,60 @@ struct SmartAlertView: View {
                     }
                     
                     HStack(spacing: 20) {
-                        ZStack(alignment: .bottomTrailing) {
-                            ZStack(alignment: .top) {
-                                Image("SmartAlertMap")
-                                    .resizable()
-                                
-                                Image("WarningCount")
-                                    .padding(.top, 12)
+                        ZStack {
+                            Image("alert_map")
+                                .resizable()
+                                .scaledToFill()
+                            VStack {
+                                Color.white
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .frame(height: 114)
+                                    .overlay {
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                HStack(spacing: 8) {
+                                                    Image(systemName: "exclamationmark.triangle")
+                                                        .font(.system(size: 30, weight: .bold))
+                                                    Text("当前预警数量")
+                                                        .font(.system(size: 20, weight: .semibold))
+                                                }
+                                                Spacer()
+                                                HStack(spacing: 24) {
+                                                    Image(systemName: "snow")
+                                                        .opacity(0.2)
+                                                    Image(systemName: "syringe.fill")
+                                                    Image(systemName: "ladybug.fill")
+                                                    Image(systemName: "water.waves")
+                                                        .opacity(0.2)
+                                                    Image(systemName: "camera.macro")
+                                                        .opacity(0.2)
+                                                }
+                                                .font(.system(size: 24, weight: .bold))
+                                            }
+                                            Spacer()
+                                            Text("3")
+                                                .font(.system(size: 64, weight: .bold))
+                                        }
+                                        .padding(20)
+                                        .foregroundStyle(Color(hex: 0xDF692E))
+                                    }
+                                    .padding(12)
+                                Spacer()
                             }
-                            NavigationLink(destination: EnlargedMapView()) {
-                                Image("MapButton")
-                                    .padding(.bottom, 12)
-                                    .padding(.trailing, 12)
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    NavigationLink(destination: EnlargedMapView()) {
+                                        Image("MapButton")
+                                            .padding(.bottom, 12)
+                                            .padding(.trailing, 12)
+                                    }
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                         
                         VStack(spacing: 20) {
                             NavigationLink(destination: AlertClassTwoView()) {
