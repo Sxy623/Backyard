@@ -43,6 +43,7 @@ struct AlertClassOneView: View {
             }
             Spacer()
         }
+        .background(Color(hex: 0xFAFAFA))
         .navigationBarBackButtonHidden(true)
     }
 
