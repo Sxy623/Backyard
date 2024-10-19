@@ -40,7 +40,8 @@ struct SmartAlertView: View {
                             Image("alert_map")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: .infinity, height: 574)
+                                .frame(height: 574)
+                                .frame(maxWidth: .infinity)
                                 .clipped()
                             VStack {
                                 Color.white
@@ -63,13 +64,13 @@ struct SmartAlertView: View {
                                                     Image(systemName: "ladybug.fill")
                                                     Image(systemName: "water.waves")
                                                         .opacity(0.2)
-                                                    Image(systemName: "camera.macro")
+                                                    Image(systemName: "globe.asia.australia.fill")
                                                         .opacity(0.2)
                                                 }
                                                 .font(.system(size: 24, weight: .bold))
                                             }
                                             Spacer()
-                                            Text("3")
+                                            Text("5")
                                                 .font(.system(size: 64, weight: .bold))
                                         }
                                         .padding(20)
@@ -90,7 +91,8 @@ struct SmartAlertView: View {
                                 }
                             }
                         }
-                        .frame(width: .infinity, height: 574)
+                        .frame(height: 574)
+                        .frame(maxWidth: .infinity)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         
                         VStack(spacing: 20) {
@@ -103,7 +105,8 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._2,
                                     numberOfAlert: 0
                                 )
-                                .frame(width: .infinity, height: 210)
+                                .frame(height: 210)
+                                .frame(maxWidth: .infinity)
                             }
                             
                             NavigationLink(destination: AlertClassOneView( alertCount: pestAlerts.count, alertName: "病害预警", detailedAlerts: pestAlerts)) {
@@ -115,7 +118,8 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._5,
                                     numberOfAlert: 2
                                 )
-                                .frame(width: .infinity, height: 162)
+                                .frame(height: 162)
+                                .frame(maxWidth: .infinity)
                             }
                             NavigationLink(destination: AlertClassTwoView()) {
                                 AlertCard(
@@ -126,7 +130,8 @@ struct SmartAlertView: View {
                                     tintColor: Color.Brand._5,
                                     numberOfAlert: 3
                                 )
-                                .frame(width: .infinity, height: 162)
+                                .frame(height: 162)
+                                .frame(maxWidth: .infinity)
                             }
                         }
                     }
@@ -141,30 +146,32 @@ struct SmartAlertView: View {
                                 tintColor: Color.Brand._5,
                                 numberOfAlert: 0
                             )
-                            .frame(width: .infinity, height: 162)
+                            .frame(height: 162)
+                            .frame(maxWidth: .infinity)
                         }
                         
                         NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
                                 backgroundColor: Color.white,
-                                icon: "camera.macro",
+                                icon: "globe.asia.australia.fill",
                                 title: "土壤健康",
                                 description: "暂无，安心",
                                 tintColor: Color.Brand._5,
                                 numberOfAlert: 0
                             )
-                            .frame(width: .infinity, height: 162)
+                            .frame(height: 162)
+                            .frame(maxWidth: .infinity)
                         }
                         
                         NavigationLink(destination: MoreAlertView()) {
                             Color.white
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
                                 .overlay {
                                     Text("...")
                                         .font(.system(size: 36))
                                         .foregroundStyle(Color.Brand._5)
                                 }
-                                .frame(width: 162, height: .infinity)
+                                .frame(width: 162, height: 162)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
                         }
                     }
                 }
