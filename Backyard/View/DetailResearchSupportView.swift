@@ -107,7 +107,7 @@ struct DetailResearchSupportView: View {
             HStack {
                 Image(systemName: "chevron.left")
                 Text("科研支持")
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color.green)
             }
         })
     }
