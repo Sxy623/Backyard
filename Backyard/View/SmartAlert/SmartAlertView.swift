@@ -39,8 +39,10 @@ struct SmartAlertView: View {
                                 Image("SmartAlertMap")
                                     .resizable()
 
-                                Image("WarningCount")
-                                    .padding(.top, 12)
+                                WarningCard(warningCount: 3, isWeatherAlert: false, isDiseaseAlert: true, isPestAlert: true, isWaterAlert: false, isSoilAlert: false)
+                                    .padding(12)
+//                                Image("WarningCount")
+//                                    .padding(.top, 12)
                             }
                             NavigationLink(destination: EnlargedMapView()) {
                                 Image("MapButton")
@@ -104,7 +106,7 @@ struct SmartAlertView: View {
                         NavigationLink(destination: AlertClassTwoView()) {
                             AlertCard(
                                 backgroundColor: Color.white,
-                                icon: "camera.macro",
+                                icon: "globe.asia.australia.fill",
                                 title: "土壤健康",
                                 description: "暂无，安心",
                                 tintColor: Color.Brand._5,
