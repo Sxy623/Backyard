@@ -10,6 +10,7 @@ import SwiftUI
 struct SmartAlertView: View {
     
     @State private var showImagePicker = false // 用于控制图片选择器的显示
+    @State private var showEnlargedMap = false
     @Environment(\.dismiss) var dismiss // 用于返回的环境变量
 
     var body: some View {
@@ -44,11 +45,16 @@ struct SmartAlertView: View {
 //                                Image("WarningCount")
 //                                    .padding(.top, 12)
                             }
-                            NavigationLink(destination: EnlargedMapView()) {
+                            .frame(maxWidth: .infinity)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                            NavigationLink(destination: EnlargedMapView()) {
                                 Image("MapButton")
                                     .padding(.bottom, 12)
                                     .padding(.trailing, 12)
-                            }
+                                    .onTapGesture {
+                                        showEnlargedMap.toggle()
+                                    }
+                            //}
                         }
                         .frame(maxWidth: .infinity)
 
@@ -129,6 +135,9 @@ struct SmartAlertView: View {
                 .padding(79)
                 .fullScreenCover(isPresented: $showImagePicker) {
                     ImagePicker(image: .constant(nil), sourceType: .camera)
+                }
+                .fullScreenCover(isPresented: $showEnlargedMap) {
+                    EnlargedMapView()
                 }
             }
             .background(Color(hex: 0xFAFAFA))
