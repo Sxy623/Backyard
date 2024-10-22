@@ -26,7 +26,7 @@ struct EnlargedMapView: View {
                         WarningCard(warningCount: 3, isWeatherAlert: false, isDiseaseAlert: true, isPestAlert: true, isWaterAlert: false, isSoilAlert: false)
                             .frame(maxWidth: 394, maxHeight: 114)
 
-//                        Image("SoilAlert")
+                        AlertsToSolve()
                     }
                     .padding(20)
                     Spacer()
@@ -98,10 +98,102 @@ struct EnlargedMapView: View {
     }
 }
 
-struct ToDealCard: View {
+struct AlertsToSolve: View {
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        ZStack{
+            Color.white
+            
+            VStack{
+                HStack{
+                    Text("待处理预警")
+                        .padding(.top, 20)
+                        .padding(.leading, 20)
+                        .padding(.bottom, 16)
+                    
+                    Spacer()
+                }
+                
+                ScrollView{
+                    AlertToSolve(alertName: "7 号预警：白粉病", isSolved: false, alertLocation: "2号试验田", alertDate: "2024.10.06")
+                    AlertToSolve(alertName: "6 号预警：蚜虫", isSolved: false, alertLocation: "3号试验田", alertDate: "2024.10.03")
+                    AlertToSolve(alertName: "5 号预警：棉铃虫", isSolved: false, alertLocation: "7号试验田", alertDate: "2024.09.25")
+                }
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                
+                Text("一键推送通知")
+                    .font(.system(size: 16))
+                    .fontWeight(.medium)
+                    .foregroundStyle(Color.Brand._2)
+                    .frame(maxWidth: .infinity, maxHeight: 50,alignment: .center)
+                    .background(Color.Brand._5)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding()
+            }
+        }
+        .frame(width: 396, height: 406)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
+}
+
+struct AlertToSolve:View {
+    var alertName: String
+    @State var isSolved: Bool
+    var alertLocation: String
+    var alertDate: String
+    
+    var body: some View {
+
+        ZStack{
+            Color(hex: 0xF5F5F5)
+            
+            VStack(alignment: .leading){
+                HStack(alignment: .top, content: {
+                    Text(alertName)
+                        .foregroundStyle(Color.Brand._5)
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Spacer()
+                    
+                    Image(systemName: isSolved ? "checkmark.circle.fill" : "circle")
+                        .foregroundStyle(Color.Brand._5)
+                        .frame(maxWidth: 19.94)
+                        .onTapGesture {
+                            isSolved.toggle()
+                        }
+                        
+                })
+//                .padding(16)
+                
+                HStack{
+                    Text(alertLocation)
+                        .foregroundStyle(Color.Brand._5)
+                        .font(.system(size: 13))
+                        .opacity(0.6)
+                    
+                    Text(alertDate)
+                        .foregroundStyle(Color.Brand._5)
+                        .font(.system(size: 13))
+                        .opacity(0.6)
+                }
+            }
+            .frame(maxWidth: .infinity, minHeight: 80)
+            .padding(16)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        //.frame(maxWidth: .infinity, maxHeight: 120)
+    }
+}
+
+#Preview{
+    AlertToSolve(alertName: "7号预警： 白粉病", isSolved: false, alertLocation: "2号试验田", alertDate: "2024.5.10")
+}
+
+#Preview{
+    AlertsToSolve()
 }
 
 struct EnlargedMapView_Previews: PreviewProvider {
