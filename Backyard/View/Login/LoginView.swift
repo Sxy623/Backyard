@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    let onSwitchToRegister: () -> Void
 
     @State private var username = ""
     @State private var password = ""
@@ -112,7 +113,7 @@ struct LoginView: View {
                                 .font(.caption)
                                 .foregroundColor(.gray)
                             Button("立即注册") {
-                                // ...
+                                onSwitchToRegister()
                             }
                             .font(.caption)
                             .foregroundStyle(.brand1)
@@ -145,6 +146,6 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(onSwitchToRegister: {})
 //        .environment(AuthManager())
 }

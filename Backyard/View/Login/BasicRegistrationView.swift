@@ -1,5 +1,5 @@
 //
-//  RegisterView.swift
+//  BasicRegistrationView.swift
 //  Backyard
 //
 //  Created by 沈心逸 on 2025/5/28.
@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct RegisterView: View {
-
-    @State private var username = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
+struct BasicRegistrationView: View {
+    @Binding var username: String
+    @Binding var password: String
+    @Binding var confirmPassword: String
+    let onNext: () -> Void
+    let onSwitchToLogin: () -> Void
+    
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
@@ -21,7 +23,7 @@ struct RegisterView: View {
                 Image("login_cover")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: geometry.size.width * 0.55, height: geometry.size.height - 10)
+                    .frame(width: geometry.size.width * 0.55, height: max(geometry.size.height - 10, 0))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding()
                 
@@ -34,7 +36,7 @@ struct RegisterView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 64, height: 64)
-                            .padding(.bottom, 50)
+                            .padding(.bottom, 30)
                         
                         Text("注册智农账号")
                             .font(.title)
@@ -48,6 +50,7 @@ struct RegisterView: View {
                                 .frame(width: 20)
                             TextField("用户名", text: $username)
                                 .textFieldStyle(PlainTextFieldStyle())
+                                .autocorrectionDisabled()
                         }
                         .padding()
                         .background(Color.gray.opacity(0.1))
@@ -77,17 +80,17 @@ struct RegisterView: View {
                         .background(Color.gray.opacity(0.1))
                         .cornerRadius(10)
                         
-                        // 注册按钮
-                        Button(action: register) {
-                            Text("注册")
+                        // 下一步按钮
+                        Button(action: validateAndNext) {
+                            Text("下一步")
                                 .font(.headline)
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.brand1)
+                                .background(isFormValid ? Color.brand1 : Color.gray.opacity(0.5))
                                 .cornerRadius(10)
                         }
-                        .disabled(username.isEmpty || password.isEmpty)
+                        .disabled(!isFormValid)
                         
                         // 登录链接
                         HStack {
@@ -96,7 +99,7 @@ struct RegisterView: View {
                                 .font(.caption)
                                 .foregroundColor(.gray)
                             Button("前往登录") {
-                                // ...
+                                onSwitchToLogin()
                             }
                             .font(.caption)
                             .foregroundStyle(.brand1)
@@ -111,19 +114,40 @@ struct RegisterView: View {
                 .frame(width: geometry.size.width * 0.45)
             }
         }
-        .alert("注册失败", isPresented: $showingAlert) {
+        .alert("输入错误", isPresented: $showingAlert) {
             Button("确定") { }
         } message: {
             Text(alertMessage)
         }
     }
     
-    func register() {
+    private var isFormValid: Bool {
+        !username.isEmpty && !password.isEmpty && !confirmPassword.isEmpty
+    }
+    
+    private func validateAndNext() {
+        if password != confirmPassword {
+            alertMessage = "两次输入的密码不一致"
+            showingAlert = true
+            return
+        }
         
+        if password.count < 6 {
+            alertMessage = "密码长度至少为6位"
+            showingAlert = true
+            return
+        }
+        
+        onNext()
     }
 }
 
 #Preview {
-    RegisterView()
-//        .environment(AuthManager())
-}
+    BasicRegistrationView(
+        username: .constant(""),
+        password: .constant(""),
+        confirmPassword: .constant(""),
+        onNext: {},
+        onSwitchToLogin: {}
+    )
+} 
