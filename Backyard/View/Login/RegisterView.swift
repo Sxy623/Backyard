@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  Backyard
 //
 //  Created by 沈心逸 on 2025/5/28.
@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegisterView: View {
 
     @State private var username = ""
     @State private var password = ""
+    @State private var confirmPassword = ""
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
@@ -27,7 +28,7 @@ struct LoginView: View {
                 VStack(spacing: 30) {
                     Spacer()
 
-                    // 登录表单
+                    // 注册表单
                     VStack(alignment: .leading, spacing: 30) {
                         Image("nong_circle")
                             .resizable()
@@ -35,7 +36,7 @@ struct LoginView: View {
                             .frame(width: 64, height: 64)
                             .padding(.bottom, 50)
                         
-                        Text("欢迎来到，智农")
+                        Text("注册智农账号")
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundStyle(.brand5)
@@ -64,38 +65,21 @@ struct LoginView: View {
                         .background(Color.gray.opacity(0.1))
                         .cornerRadius(10)
                         
-                        // 用户协议和隐私政策
-                        HStack() {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(.brand1)
-                                .font(.caption)
-                            Text("登录即表示您同意我们的")
-                                .font(.caption)
+                        // 确认密码输入框
+                        HStack {
+                            Image(systemName: "lock.fill")
                                 .foregroundStyle(.gray)
-                            Button {
-                                // 处理用户协议
-                            } label: {
-                                Text("用户协议")
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                                    .underline()
-                            }
-                            Text("和")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
-                            Button {
-                                // 处理隐私政策
-                            } label: {
-                                Text("隐私政策")
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                                    .underline()
-                            }
+                                .frame(width: 20)
+                            SecureField("确认密码", text: $confirmPassword)
+                                .textFieldStyle(PlainTextFieldStyle())
                         }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
                         
-                        // 登录按钮
-                        Button(action: login) {
-                            Text("登录")
+                        // 注册按钮
+                        Button(action: register) {
+                            Text("注册")
                                 .font(.headline)
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
@@ -105,13 +89,13 @@ struct LoginView: View {
                         }
                         .disabled(username.isEmpty || password.isEmpty)
                         
-                        // 注册链接
+                        // 登录链接
                         HStack {
                             Spacer()
-                            Text("还没有智农账号？")
+                            Text("已经注册过智农账号？")
                                 .font(.caption)
                                 .foregroundColor(.gray)
-                            Button("立即注册") {
+                            Button("前往登录") {
                                 // ...
                             }
                             .font(.caption)
@@ -127,24 +111,19 @@ struct LoginView: View {
                 .frame(width: geometry.size.width * 0.45)
             }
         }
-        .alert("登录失败", isPresented: $showingAlert) {
+        .alert("注册失败", isPresented: $showingAlert) {
             Button("确定") { }
         } message: {
             Text(alertMessage)
         }
     }
     
-    private func login() {
-//        if authManager.login(username: username, password: password) {
-//            // 登录成功，AuthManager会自动更新认证状态
-//        } else {
-//            alertMessage = "用户名或密码错误"
-//            showingAlert = true
-//        }
+    func register() {
+        
     }
 }
 
 #Preview {
-    LoginView()
+    RegisterView()
 //        .environment(AuthManager())
 }
