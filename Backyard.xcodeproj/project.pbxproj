@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8E96E4C22DE6DDCA00EC75A4 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8E96E4C12DE6DDCA00EC75A4 /* SwiftyJSON */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8EF1AF412CB6906F00B0D948 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E96E4C22DE6DDCA00EC75A4 /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = Backyard;
 			packageProductDependencies = (
+				8E96E4C12DE6DDCA00EC75A4 /* SwiftyJSON */,
 			);
 			productName = Backyard;
 			productReference = 8EF1AF302CB6906F00B0D948 /* Backyard.app */;
@@ -208,6 +214,10 @@
 			);
 			mainGroup = 8EF1AF272CB6906F00B0D948;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8E96E4C02DE6DDCA00EC75A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				8E96E4C32DE6DEBB00EC75A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8EF1AF312CB6906F00B0D948 /* Products */;
 			projectDirPath = "";
@@ -577,6 +587,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E96E4C02DE6DDCA00EC75A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		8E96E4C32DE6DEBB00EC75A4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E96E4C12DE6DDCA00EC75A4 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E96E4C02DE6DDCA00EC75A4 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8EF1AF282CB6906F00B0D948 /* Project object */;
 }

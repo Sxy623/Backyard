@@ -11,7 +11,6 @@ struct ContentView: View {
     
     @AppStorage("sidebarCustomizations") var tabViewCustomization: TabViewCustomization
     @State private var selectedTab: Tabs = .数据监测
-    @State var items = ["门头沟黄安坨", "一号实验田", "二号实验田"]
     
     var body: some View {
         TabView {
@@ -30,15 +29,6 @@ struct ContentView: View {
             Tab(Tabs.供销管理.name, systemImage: Tabs.供销管理.symbol) {
                 SupplyAndMarketingView()
             }.customizationID(Tabs.供销管理.customizationID)
-            
-            TabSection("快速访问") {
-                ForEach(items, id: \.self) { item in
-                    Tab(item, systemImage: "square.grid.2x2") {
-                        // ..
-                    }
-                }
-            }
-            .defaultVisibility(.hidden, for: .tabBar)
         }
         .tabViewSidebarHeader {
             HStack {
